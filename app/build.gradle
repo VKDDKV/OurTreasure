@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+def PACKAGE_NAME = "vkd.mannermakethman.ourtreasure"
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+    defaultConfig {
+        applicationId "com.mannermakethman.vkd.ourtreasure"
+        minSdkVersion 19
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+        develop {
+            applicationId PACKAGE_NAME
+            //サーバーのURLの向き先
+            buildConfigField "boolean","envDebug", "true"
+        }
+        production {
+            applicationId PACKAGE_NAME
+            buildConfigField "boolean", "envDebug" , "false"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
+                // Rename APK
+                if (variant.productFlavors[0].name == "production") {
+                    def versionCode = defaultConfig.versionCode
+                    def versionName = defaultConfig.versionName
+                    def newName = "OurTreasure_${versionName}_${versionCode}.apk"
+                    output.outputFile = new File(output.outputFile.parent, newName)
+                }
+                if (variant.productFlavors[0].name == "develop") {
+                    def versionCode = defaultConfig.versionCode
+                    def versionName = "${defaultConfig.versionName}_dev"
+                    def newName = "OurTreasure_${versionName}_${versionCode}.apk"
+                    output.outputFile = new File(output.outputFile.parent, newName)
+                }
+
+            }
+        }
+    }
+    sourceSets {
+        debug { assets.srcDirs = ['src/debug/assets', 'src/debug/assets/'] }
+        develop { res.srcDirs = ['src/develop/res', 'src/develop/res/'] }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:23.+'
+
+}
