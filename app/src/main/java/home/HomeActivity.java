@@ -1,7 +1,8 @@
 package home;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,12 +15,12 @@ import com.mannermakethman.vkd.ourtreasure.R;
 
 import java.util.List;
 
+import Statistic.StatisticFragment;
 import account.AccountFragment;
 import base.ActivityBase;
 import core.AppInfo;
 import expense.ExpenseFragment;
 import history.HistoryFragment;
-import purpose.PurposeFragment;
 
 public class HomeActivity extends ActivityBase {
     List<String> buttonNavigationViewList;
@@ -29,7 +30,7 @@ public class HomeActivity extends ActivityBase {
     Button drawerLeftNavigation;
     RelativeLayout leftDrawer;
     HomeHeaderFragment headerFragment;
-    LinearLayout navigationExpense, navigationHistory, navigationAccount, navigationPurpose;
+    LinearLayout navigationExpense, navigationHistory, navigationAccount, navigationStatistic;
     int showingFragment = -1;
 
     @Override
@@ -37,15 +38,17 @@ public class HomeActivity extends ActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         //set main Fragment
-        ExpenseFragment expenseFragment = new ExpenseFragment();
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_content, expenseFragment, "EXPENSE");
+        StatisticFragment staticticFragment = new StatisticFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_content, staticticFragment, "Purpose");
         fragmentTransaction.commit();
         //set showingFragment
-        showingFragment = AppInfo.SHOWING_EXPENSE_FRAGMENT;
+        showingFragment = AppInfo.SHOWING_STATISTIC_FRAGMENT;
         navigationExpense = (LinearLayout) findViewById(R.id.navigation_expend);
         navigationAccount = (LinearLayout) findViewById(R.id.navigation_account);
-        navigationPurpose = (LinearLayout) findViewById(R.id.navigation_purpose);
+        navigationStatistic = (LinearLayout) findViewById(R.id.navigation_statistic);
         navigationHistory = (LinearLayout) findViewById(R.id.navigation_history);
     }
 
@@ -73,11 +76,11 @@ public class HomeActivity extends ActivityBase {
 
     }
 
-    public void navigationPurpose(View view) {
-        showingFragment = AppInfo.SHOWING_PURPOSE_FRAGMENT;
+    public void navigationStatistic(View view) {
+        showingFragment = AppInfo.SHOWING_STATISTIC_FRAGMENT;
         switchNavigation();
         clearBackgroundNavigation();
-        navigationPurpose.setBackgroundColor(getResources().getColor(R.color.navigation_background_selected));
+        navigationStatistic.setBackgroundColor(getResources().getColor(R.color.navigation_background_selected));
 
 
     }
@@ -86,30 +89,31 @@ public class HomeActivity extends ActivityBase {
         navigationHistory.setBackgroundColor(getResources().getColor(R.color.navigation_background));
         navigationExpense.setBackgroundColor(getResources().getColor(R.color.navigation_background));
         navigationAccount.setBackgroundColor(getResources().getColor(R.color.navigation_background));
-        navigationPurpose.setBackgroundColor(getResources().getColor(R.color.navigation_background));
+        navigationStatistic.setBackgroundColor(getResources().getColor(R.color.navigation_background));
     }
 
     private void switchNavigation() {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
         switch (showingFragment) {
             case AppInfo.SHOWING_EXPENSE_FRAGMENT:
-                ExpenseFragment expenseFragment = (ExpenseFragment) getFragmentManager().findFragmentByTag("EXPENSE");
+                ExpenseFragment expenseFragment = (ExpenseFragment) getSupportFragmentManager().findFragmentByTag("EXPENSE");
                 if (expenseFragment == null) {
                     expenseFragment = new ExpenseFragment();
                 }
                 fragmentTransaction.replace(R.id.fragment_content, expenseFragment, "EXPENSE");
                 fragmentTransaction.commit();
                 break;
-            case AppInfo.SHOWING_PURPOSE_FRAGMENT:
-                PurposeFragment purposeFragment = (PurposeFragment) getFragmentManager().findFragmentByTag("PURPOSE");
-                if (purposeFragment == null) {
-                    purposeFragment = new PurposeFragment();
+            case AppInfo.SHOWING_STATISTIC_FRAGMENT:
+                StatisticFragment statisticFragment = (StatisticFragment) getSupportFragmentManager().findFragmentByTag("PURPOSE");
+                if (statisticFragment == null) {
+                    statisticFragment = new StatisticFragment();
                 }
-                fragmentTransaction.replace(R.id.fragment_content, purposeFragment, "PURPOSE");
+                fragmentTransaction.replace(R.id.fragment_content, statisticFragment, "PURPOSE");
                 fragmentTransaction.commit();
                 break;
             case AppInfo.SHOWING_HISTORY_FRAGMENT:
-                HistoryFragment historyFragment = (HistoryFragment) getFragmentManager().findFragmentByTag("HISTORY");
+                HistoryFragment historyFragment = (HistoryFragment) getSupportFragmentManager().findFragmentByTag("HISTORY");
                 if (historyFragment == null) {
                     historyFragment = new HistoryFragment();
                 }
@@ -117,7 +121,7 @@ public class HomeActivity extends ActivityBase {
                 fragmentTransaction.commit();
                 break;
             case AppInfo.SHOWING_ACCOUNT_FRAGMENT:
-                AccountFragment accountFragment = (AccountFragment) getFragmentManager().findFragmentByTag("ACCOUNT");
+                AccountFragment accountFragment = (AccountFragment) getSupportFragmentManager().findFragmentByTag("ACCOUNT");
                 if (accountFragment == null) {
                     accountFragment = new AccountFragment();
                 }

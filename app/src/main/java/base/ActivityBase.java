@@ -1,13 +1,13 @@
 package base;
 
-import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.mannermakethman.vkd.ourtreasure.R;
 
 
-public abstract class ActivityBase extends Activity {
+public abstract class ActivityBase extends AppCompatActivity {
 
     protected String[] mMonths = new String[]{
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"

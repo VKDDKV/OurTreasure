@@ -2,16 +2,17 @@ package base;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.app.Fragment;
 
 /**
  * Created by nguyentviet3513 on 12/31/2017.
  */
 
-public class FragmentBase extends android.app.Fragment {
+public class FragmentBase extends Fragment {
     protected String[] mMonths = new String[]{
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
     };
-
+    protected Context applicationContext;
     protected String[] mParties = new String[]{
             "Party A", "Party B", "Party C", "Party D", "Party E", "Party F", "Party G", "Party H",
             "Party I", "Party J", "Party K", "Party L", "Party M", "Party N", "Party O", "Party P",
@@ -25,5 +26,7 @@ public class FragmentBase extends android.app.Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        applicationContext = context.getApplicationContext();
+
     }
 }

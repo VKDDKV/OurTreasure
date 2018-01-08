@@ -24,7 +24,7 @@
             android:id="@+id/navigation_expend"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/navigation_background_selected"
+
             android:onClick="navigationExpense"
             android:orientation="vertical"
             android:paddingBottom="@dimen/view_navigation_padding_bottom"
@@ -49,10 +49,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/navigation_purpose"
+            android:id="@+id/navigation_statistic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="navigationPurpose"
+            android:background="@color/navigation_background_selected"
+            android:onClick="navigationStatistic"
             android:orientation="vertical"
             android:paddingBottom="@dimen/view_navigation_padding_bottom"
             android:paddingTop="@dimen/view_navigation_padding_top"

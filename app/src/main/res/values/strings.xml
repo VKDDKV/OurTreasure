@@ -5,4 +5,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="type_of_chart_array">
+        <item>Pie</item>
+        <item>Line</item>
+        <item>Bar</item>
+        <item>Combined</item>
+        <item>Scatter</item>
+        <item>Bubble</item>
+        <item>Stacked Bar</item>
+        <item>Neptune</item>
+    </string-array>
+
 </resources>
