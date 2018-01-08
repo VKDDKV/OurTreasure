@@ -1,17 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_home"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.mannermakethman.vkd.ourtreasure.home.HomeActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <RelativeLayout
+        android:id="@+id/fragment_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation"></RelativeLayout>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navigation_background"
+        app:alignItems="center"
+        app:flexWrap="wrap"
+        app:justifyContent="space_around">
+
+        <LinearLayout
+            android:id="@+id/navigation_expend"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/navigation_background_selected"
+            android:onClick="navigationExpense"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/view_navigation_padding_bottom"
+            android:paddingTop="@dimen/view_navigation_padding_top"
+            app:layout_flexBasisPercent="@fraction/bottom_navigation_element">
+
+            <View
+                android:layout_width="@dimen/button_bottom_navigation_width"
+                android:layout_height="@dimen/view_navigation_bottom_height"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/navigation_expend" />
+
+            <TextView
+                android:id="@+id/expend_button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/view_navigation_padding_top_text"
+                android:text="Expense"
+                android:textColor="@color/home_white_text" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navigation_purpose"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="navigationPurpose"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/view_navigation_padding_bottom"
+            android:paddingTop="@dimen/view_navigation_padding_top"
+            app:layout_flexBasisPercent="@fraction/bottom_navigation_element">
+
+            <View
+                android:layout_width="@dimen/button_bottom_navigation_width"
+                android:layout_height="@dimen/view_navigation_bottom_height"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/navigation_purpose" />
+
+            <TextView
+                android:id="@+id/purpose_button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/view_navigation_padding_top_text"
+                android:text="Purpose"
+                android:textColor="@color/home_white_text"
+                app:layout_flexBasisPercent="@fraction/bottom_navigation_element" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navigation_history"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="navigationHistory"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/view_navigation_padding_bottom"
+            android:paddingTop="@dimen/view_navigation_padding_top"
+            app:layout_flexBasisPercent="@fraction/bottom_navigation_element">
+
+            <View
+                android:layout_width="@dimen/button_bottom_navigation_width"
+                android:layout_height="@dimen/view_navigation_bottom_height"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/navigation_history" />
+
+            <TextView
+                android:id="@+id/history_button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/view_navigation_padding_top_text"
+                android:text="History"
+                android:textColor="@color/home_white_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navigation_account"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="navigationAccount"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/view_navigation_padding_bottom"
+            android:paddingTop="@dimen/view_navigation_padding_top"
+            app:layout_flexBasisPercent="@fraction/bottom_navigation_element">
+
+            <View
+                android:layout_width="@dimen/button_bottom_navigation_width"
+
+                android:layout_height="@dimen/view_navigation_bottom_height"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/navigation_account" />
+
+            <TextView
+                android:id="@+id/account_button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/view_navigation_padding_top_text"
+                android:text="Account"
+                android:textColor="@color/home_white_text" />
+        </LinearLayout>
+    </com.google.android.flexbox.FlexboxLayout>
+
 </RelativeLayout>

@@ -2,8 +2,7 @@ apply plugin: 'com.android.application'
 
 def PACKAGE_NAME = "vkd.mannermakethman.ourtreasure"
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 23
     flavorDimensions "treasure"
     defaultConfig {
         applicationId "com.mannermakethman.vkd.ourtreasure"
@@ -23,48 +22,31 @@ android {
         develop {
             applicationId PACKAGE_NAME
             //サーバーのURLの向き先
-            buildConfigField "boolean","envDebug", "true"
+            buildConfigField "boolean", "envDebug", "true"
             dimension "treasure"
         }
         production {
             applicationId PACKAGE_NAME
-            buildConfigField "boolean", "envDebug" , "false"
+            buildConfigField "boolean", "envDebug", "false"
             dimension "treasure"
         }
     }
 
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
-            if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
-                // Rename APK
-                if (variant.productFlavors[0].name == "production") {
-                    def versionCode = defaultConfig.versionCode
-                    def versionName = defaultConfig.versionName
-                    def newName = "OurTreasure_${versionName}_${versionCode}.apk"
-                    outputFileName = new File(output.outputFile.parent, newName)
-
-                }
-                if (variant.productFlavors[0].name == "develop") {
-                    def versionCode = defaultConfig.versionCode
-                    def versionName = "${defaultConfig.versionName}_dev"
-                    def newName = "OurTreasure_${versionName}_${versionCode}.apk"
-                    outputFileName = new File(output.outputFile.parent, newName)
-                }
-
-            }
-        }
-    }
     sourceSets {
-        debug { assets.srcDirs = ['src/debug/assets', 'src/debug/assets/'] }
         develop { res.srcDirs = ['src/develop/res', 'src/develop/res/'] }
     }
 }
 
 dependencies {
+    implementation 'com.android.support:support-v4:23.1.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:23.+'
+    implementation 'com.google.android:flexbox:0.2.5'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
 
 }
