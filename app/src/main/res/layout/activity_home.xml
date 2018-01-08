@@ -63,15 +63,15 @@
                 android:layout_width="@dimen/button_bottom_navigation_width"
                 android:layout_height="@dimen/view_navigation_bottom_height"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/navigation_purpose" />
+                android:background="@drawable/navigation_statistic" />
 
             <TextView
-                android:id="@+id/purpose_button_text"
+                android:id="@+id/statistic_button_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/view_navigation_padding_top_text"
-                android:text="Purpose"
+                android:text="Statistic"
                 android:textColor="@color/home_white_text"
                 app:layout_flexBasisPercent="@fraction/bottom_navigation_element" />
         </LinearLayout>
